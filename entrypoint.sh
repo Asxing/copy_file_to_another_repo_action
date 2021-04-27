@@ -44,11 +44,11 @@ fi
 echo "Adding git commit"
 git add .
 
-echo git status | grep -q "Changes to be committed"
-if [ $? -ne 0 ] ;then
+if [ -z "$(git status --porcelain)" ]
+then
+  echo "No changes detected"
+else
   git commit --message "$INPUT_COMMIT_MESSAGE"
   echo "Pushing git commit"
   git push -u origin HEAD:$OUTPUT_BRANCH
-else
-  echo "No changes detected"
 fi
