@@ -43,8 +43,9 @@ fi
 
 echo "Adding git commit"
 git add .
-if git status | grep -i "Changes to be committed" > /dev/null
-then
+
+echo git status | grep -q "Changes to be committed"
+if [ $? -ne 0 ] ;then
   git commit --message "$INPUT_COMMIT_MESSAGE"
   echo "Pushing git commit"
   git push -u origin HEAD:$OUTPUT_BRANCH
