@@ -28,7 +28,8 @@ echo "mkdir -p xxx"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 echo "Copying contents to git repo"
 cp -R "$INPUT_SOURCE_FILE" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
-cd "$CLONE_DIR"
+echo "cd ..."
+cd "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 
 if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]
 then
