@@ -44,6 +44,9 @@ fi
 echo "Adding git commit"
 git add .
 
+echo "path ....."
+pwd
+
 if [ -z "$(git status --porcelain)" ]
 then
   echo "No changes detected"
