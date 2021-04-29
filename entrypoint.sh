@@ -17,6 +17,13 @@ OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 
 CLONE_DIR=$(mktemp -d)
 
+git config --local --name-only --get-regexp core\.sshCommand
+git config --local --unset-all core.sshCommand
+git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+git config --local --unset-all http.https://github.com/.extraheader
+git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+
 echo "Cloning destination git repository"
 git config --global --replace-all user.email "$INPUT_USER_EMAIL"
 git config --global --replace-all user.name "$INPUT_USER_NAME"
