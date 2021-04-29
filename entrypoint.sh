@@ -18,7 +18,10 @@ OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 CLONE_DIR=$(mktemp -d)
 
 echo "Cloning destination git repository"
-git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
+
+git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | \             # dike out the http.extraheader from git config
+            xargs -L1 git config --unset-all
+
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
 git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-token:$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
