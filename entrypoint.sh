@@ -18,6 +18,8 @@ OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 CLONE_DIR=$(mktemp -d)
 
 echo "Cloning destination git repository"
+git config --local --unset-all "http.https://github.com/.extraheader"
+git config --global --unset-all "http.https://github.com/.extraheader"
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
 git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-token:$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
