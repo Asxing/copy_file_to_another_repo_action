@@ -18,16 +18,9 @@ OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 CLONE_DIR=$(mktemp -d)
 
 echo "Cloning destination git repository"
-if [ -z "$INPUT_USER_EMAIL" ]
-then
-  git config --global user.email "$INPUT_USER_EMAIL"
-fi
-
-if [ -z "$INPUT_USER_NAME" ]
-then
-  git config --global user.name "$INPUT_USER_NAME"
-fi
-
+git credential-manager uninstall
+git config --global user.email "$INPUT_USER_EMAIL"
+git config --global user.name "$INPUT_USER_NAME"
 git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-token:$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
 rm -rf $CLONE_DIR/$INPUT_DESTINATION_FOLDER/*
