@@ -28,7 +28,7 @@ mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 cp -R "$INPUT_SOURCE_FILE"/* "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 cd "$CLONE_DIR"
 git remote rm origin
-git remote add origin git@github.com:$INPUT_DESTINATION_REPO.git
+git remote add origin https://github.com/$INPUT_DESTINATION_REPO.git
 # git remote set-url origin git://github.com/$INPUT_DESTINATION_REPO.git
 
 if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]
